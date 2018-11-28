@@ -9,12 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var goToMyJournalBarButton: UIBarButtonItem!
+    @IBOutlet weak var discoverButton: UIBarButtonItem!
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    @IBAction func goToMyJournalButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
+    @IBAction func discoverButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
+    
 
+    
+    
 
 }
+
+
 
