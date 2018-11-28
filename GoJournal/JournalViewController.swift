@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class JournalViewController: UIViewController {
     
@@ -19,11 +20,15 @@ class JournalViewController: UIViewController {
     var entryTitlesArray = ["Spring Break", "Service Trip", "Frineds Weekend", "Graduation Trip", "RV Vacation"]
     var entryLocationsArray = ["Florida", "Peru", "New York", "Europe", "Utah"]
     var entriesArray = ["Sunny weather!", "Learned a lot!", "Too much fun!", "Great bonding with friends", "Amazing outdoor experience"]
+    var imageArray = [UIImage]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sortSegmentedControl.isHidden = false
+        for _ in 0..<entriesArray.count {
+            imageArray.append(UIImage())
+        }
         tableView.dataSource = self
         tableView.delegate = self
         // if entryTitlesArray 
@@ -33,22 +38,23 @@ class JournalViewController: UIViewController {
     }
     
     
-//    override func viewWillAppear(_ animated: Bool) {
-//         navigationController?.setToolbarHidden(false, animated: false)
+    override func viewWillAppear(_ animated: Bool) {
+         navigationController?.setToolbarHidden(false, animated: false)
 //        spots.loadData {
 //            self.sortBasedOnSegmentPressed()
 //            self.tableView.reloadData()
 //        }
-//    }
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditEntry" {
             let destination = segue.destination as! JournalDetailViewController
-            let index = tableView.indexPathForSelectedRow!.row
-            destination.entryTitle = entryTitlesArray[index]
-            destination.entryLocation = entryLocationsArray[index]
-            destination.entry = entriesArray[index]
+            let selectedIndexPath = tableView.indexPathForSelectedRow!
+            destination.entryTitle = entryTitlesArray[selectedIndexPath.row]
+            destination.entryLocation = entryLocationsArray[selectedIndexPath.row]
+            destination.entry = entriesArray[selectedIndexPath.row]
+            destination.entryImage = imageArray[selectedIndexPath.row]
         } else {
             if let selectedPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedPath, animated: false)
@@ -62,12 +68,14 @@ class JournalViewController: UIViewController {
             entryTitlesArray[indexPath.row] = sourceViewController.entryTitle!
             entryLocationsArray[indexPath.row] = sourceViewController.entryLocation!
             entriesArray[indexPath.row] = sourceViewController.entry!
+            imageArray[indexPath.row] = sourceViewController.entryImage!
             tableView.reloadRows(at: [indexPath], with: .automatic)
         } else {
             let newIndexPath = IndexPath(row: entryTitlesArray.count, section: 0)
             entryTitlesArray.append(sourceViewController.entryTitle!)
             entryLocationsArray.append(sourceViewController.entryLocation!)
             entriesArray.append(sourceViewController.entry!)
+            imageArray.append(sourceViewController.entryImage!)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
         saveDefaultsData()
@@ -88,6 +96,8 @@ class JournalViewController: UIViewController {
 //            // entryTitlesArray.sort(by: {$0.name < $1.name})
 //        case 1: // Location
 //            entryLocationsArray.sort(by: {$0.name < $1.name})
+//            print("TODO")
+//        case 2:
 //            print("TODO")
 //        default:
 //            print("***ERROR: This should not have occurred. The segmented control should just have two segments.")
@@ -112,15 +122,7 @@ class JournalViewController: UIViewController {
             editBarButton.title = "Done"
         }
     }
-    
-    
-    
-
-
 }
-
-
-
 
 extension JournalViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -139,6 +141,7 @@ extension JournalViewController: UITableViewDataSource, UITableViewDelegate {
             entryTitlesArray.remove(at: indexPath.row)
             entryLocationsArray.remove(at: indexPath.row)
             entriesArray.remove(at: indexPath.row)
+            imageArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             saveDefaultsData()
         }
@@ -148,12 +151,15 @@ extension JournalViewController: UITableViewDataSource, UITableViewDelegate {
         let titleToMove = entryTitlesArray[sourceIndexPath.row]
         let locationToMove = entryLocationsArray[sourceIndexPath.row]
         let entryToMove = entriesArray[sourceIndexPath.row]
+        let imageToMove = imageArray[sourceIndexPath.row]
         entryTitlesArray.remove(at: sourceIndexPath.row)
         entryLocationsArray.remove(at: sourceIndexPath.row)
         entriesArray.remove(at: sourceIndexPath.row)
+        imageArray.remove(at: sourceIndexPath.row)
         entryTitlesArray.insert(titleToMove, at: destinationIndexPath.row)
         entryLocationsArray.insert(locationToMove, at: destinationIndexPath.row)
         entriesArray.insert(entryToMove, at: destinationIndexPath.row)
+        imageArray.insert(imageToMove, at: destinationIndexPath.row)
         saveDefaultsData()
     }
     

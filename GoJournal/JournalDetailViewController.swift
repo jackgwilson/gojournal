@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 import AVFoundation
 
-class JournalDetailViewController: UIViewController {
+class JournalDetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var locationField: UITextField!
@@ -26,6 +26,7 @@ class JournalDetailViewController: UIViewController {
     var entryTitle: String!
     var entryLocation: String!
     var entry: String!
+    var entryImage: UIImage!
     var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -43,6 +44,9 @@ class JournalDetailViewController: UIViewController {
         if let entry = entry {
             entryTextView.text = entry
         }
+        if let entryImage = entryImage {
+            imageView.image = entryImage
+        }
         //enableDisableSaveButton()
         titleField.becomeFirstResponder()
     }
@@ -52,6 +56,7 @@ class JournalDetailViewController: UIViewController {
             entryTitle = titleField.text
             entryLocation = locationField.text
             entry = entryTextView.text
+            entryImage = imageView.image!
         }
     }
     
@@ -101,14 +106,14 @@ class JournalDetailViewController: UIViewController {
     
     @IBAction func photoLibraryButtonPressed(_ sender: UIButton) {
         imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func takePhotoButtonPressed(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePicker.sourceType = .camera
-            imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            imagePicker.delegate = self
             present(imagePicker, animated: true, completion: nil)
         } else {
             showAlert(title: "Camera Not Available", message: "There is no camera available on this device.")
