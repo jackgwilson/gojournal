@@ -52,7 +52,7 @@ class SearchController: UIViewController {
                 print(json["response"]["venues"][0]["name"].string)
                 
                 if let currentVenueName = json["response"]["venues"][0]["name"].string {
-                    self.currentLocationLabel.text = currentVenueName
+                    self.currentLocationLabel.text = "The closest venue is: \(currentVenueName)"
                 } else {
                     print("Could not return a current venue name.")
                 }
@@ -62,7 +62,29 @@ class SearchController: UIViewController {
         }
     }
     
-
+    func fetchVenues() {
+        let url = "https://api.foursquare.com/v2/venues/explore/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&v=20181129&intent=checkin&limit=1&radius=4000&client_id=\(clientID)&client_secret=\(clientSecret)"
+        
+        Alamofire.request(url).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print("fetchVenues Reponse")
+                print(json)
+                if let closeVenues = json["response"]["groups"]["venue"]["name"][0].string {
+                    print(closeVenues)
+                } else {
+                    print("Could not return close venues.")
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+//        for venue in placesToDiscover {
+//            venue = JSON(["response"]["venues"][0]["name"].string)
+//        }
+    }
+    
     
     
     
@@ -114,6 +136,7 @@ extension SearchController: CLLocationManagerDelegate {
         currentLocation = locations.last
         print("CURRENT LOCATION IS \(currentLocation.coordinate.longitude), \(currentLocation.coordinate.latitude)")
         self.snapToPlace()
+        self.fetchVenues()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
