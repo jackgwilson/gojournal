@@ -19,25 +19,38 @@ class SearchController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var currentLocationLabel: UILabel!
     
-    
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation!
     var searchResults = [JSON]()
-    var currentLocation: CLLocationCoordinate2D!
+    var placesToDiscover: [String] = []
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        snapToPlace()
+        //snapToPlace()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("Attempting to get location upon viewWillAppear")
+        getLocation {
+            //self.snapToPlace()
+        }
     }
     
     func snapToPlace() {
-        let url = "https://api.foursquare.com/v2/search/?ll=\(currentLocation.latitude),\(currentLocation.longitude)&v=20181128&intent=checkin&limit=1&radius=4000&client_id=\(clientID)&client_secret=\(clientSecret)"
-        
+        print(currentLocation)
+        print(currentLocation.coordinate.longitude)
+        let url = "https://api.foursquare.com/v2/venues/search/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&v=20181129&intent=checkin&limit=1&radius=4000&client_id=\(clientID)&client_secret=\(clientSecret)"
+        print(url)
         Alamofire.request(url).responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+                print(json)
+                print(json["response"]["venues"][0]["name"].string)
+                
                 if let currentVenueName = json["response"]["venues"][0]["name"].string {
                     self.currentLocationLabel.text = currentVenueName
                 } else {
@@ -47,7 +60,6 @@ class SearchController: UIViewController {
                 print(error)
             }
         }
-        
     }
     
 
@@ -69,4 +81,42 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension SearchController: CLLocationManagerDelegate {
+    
+    func getLocation(completed: @escaping () -> ()) {
+        print("GETTING LOCATION")
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        completed()
+    }
+    
+    func handleLocationAuthorizationStatus(status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.requestLocation()
+            print("REQUESTING LOCATION")
+        case .denied:
+            print("I'm sorry - can't show location. User has not authorized it.")
+        case .restricted:
+            print("Access denied. Likely parental controls restrict location services in this app.")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        handleLocationAuthorizationStatus(status: status)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation = locations.last
+        print("CURRENT LOCATION IS \(currentLocation.coordinate.longitude), \(currentLocation.coordinate.latitude)")
+        self.snapToPlace()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to get user location")
+    }
 }
