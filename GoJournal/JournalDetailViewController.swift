@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 import AVFoundation
 
-class JournalDetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class JournalDetailViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var locationField: UITextField!
@@ -18,16 +18,11 @@ class JournalDetailViewController: UIViewController, UIImagePickerControllerDele
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var entryTextView: UITextView!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var photoLibraryButton: UIButton!
-    @IBOutlet weak var takePhotoButton: UIButton!
     @IBOutlet weak var lookUpPlaceButton: UIBarButtonItem!
     
     var entryTitle: String!
     var entryLocation: String!
     var entry: String!
-    var entryImage: UIImage!
-    var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +39,6 @@ class JournalDetailViewController: UIViewController, UIImagePickerControllerDele
         if let entry = entry {
             entryTextView.text = entry
         }
-        if let entryImage = entryImage {
-            imageView.image = entryImage
-        }
         //enableDisableSaveButton()
         titleField.becomeFirstResponder()
     }
@@ -56,26 +48,25 @@ class JournalDetailViewController: UIViewController, UIImagePickerControllerDele
             entryTitle = titleField.text
             entryLocation = locationField.text
             entry = entryTextView.text
-            entryImage = imageView.image!
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        imageView.image = selectedImage
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
-    }
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+//        imageView.image = selectedImage
+//        dismiss(animated: true, completion: nil)
+//    }
+//
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        dismiss(animated: true, completion: nil)
+//    }
+//
+//    func showAlert(title: String, message: String) {
+//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//        alertController.addAction(defaultAction)
+//        present(alertController, animated: true, completion: nil)
+//    }
     
     
     
@@ -104,21 +95,23 @@ class JournalDetailViewController: UIViewController, UIImagePickerControllerDele
     
     
     
-    @IBAction func photoLibraryButtonPressed(_ sender: UIButton) {
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
-    }
+//    @IBAction func photoLibraryButtonPressed(_ sender: UIButton) {
+//        imagePicker.sourceType = .photoLibrary
+//        imagePicker.delegate = self
+//        present(imagePicker, animated: true, completion: nil)
+//    }
     
-    @IBAction func takePhotoButtonPressed(_ sender: UIButton) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-            imagePicker.delegate = self
-            present(imagePicker, animated: true, completion: nil)
-        } else {
-            showAlert(title: "Camera Not Available", message: "There is no camera available on this device.")
-        }
-    }
+//    @IBAction func takePhotoButtonPressed(_ sender: UIButton) {
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            imagePicker.sourceType = .camera
+//            imagePicker.delegate = self
+//            present(imagePicker, animated: true, completion: nil)
+//        } else {
+//            showAlert(title: "Camera Not Available", message: "There is no camera available on this device.")
+//        }
+//    }
+    
+    
     
     @IBAction func lookUpPlaceButtonPressed(_ sender: UIBarButtonItem) {
         let autocompleteController = GMSAutocompleteViewController()

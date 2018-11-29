@@ -14,6 +14,8 @@
 		8850302421AB75C5001D8FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8850302321AB75C5001D8FE6 /* Assets.xcassets */; };
 		8850302721AB75C5001D8FE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850302521AB75C5001D8FE6 /* LaunchScreen.storyboard */; };
 		8850302F21ABA0C6001D8FE6 /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850302E21ABA0C5001D8FE6 /* JournalViewController.swift */; };
+		88562D4421AF8AF900BD0768 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88562D4321AF8AF900BD0768 /* SearchController.swift */; };
+		88562D4621AF8B7200BD0768 /* SearchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88562D4521AF8B7200BD0768 /* SearchDetailsViewController.swift */; };
 		88731E9721ACEF720003E10C /* JournalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88731E9621ACEF720003E10C /* JournalDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,8 @@
 		8850302621AB75C5001D8FE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8850302821AB75C5001D8FE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8850302E21ABA0C5001D8FE6 /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
+		88562D4321AF8AF900BD0768 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		88562D4521AF8B7200BD0768 /* SearchDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailsViewController.swift; sourceTree = "<group>"; };
 		88731E9621ACEF720003E10C /* JournalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDetailViewController.swift; sourceTree = "<group>"; };
 		EBDC7C9CE864C04630082D6F /* Pods_GoJournal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoJournal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				8850301C21AB75C1001D8FE6 /* AppDelegate.swift */,
+				88562D4521AF8B7200BD0768 /* SearchDetailsViewController.swift */,
+				88562D4321AF8AF900BD0768 /* SearchController.swift */,
 				88731E9621ACEF720003E10C /* JournalDetailViewController.swift */,
 				8850302E21ABA0C5001D8FE6 /* JournalViewController.swift */,
 				8850301E21AB75C1001D8FE6 /* ViewController.swift */,
@@ -242,6 +248,7 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FoursquareAPIClient/FoursquareAPIClient.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -268,6 +275,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoursquareAPIClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -298,7 +306,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8850301F21AB75C1001D8FE6 /* ViewController.swift in Sources */,
+				88562D4421AF8AF900BD0768 /* SearchController.swift in Sources */,
 				8850302F21ABA0C6001D8FE6 /* JournalViewController.swift in Sources */,
+				88562D4621AF8B7200BD0768 /* SearchDetailsViewController.swift in Sources */,
 				8850301D21AB75C1001D8FE6 /* AppDelegate.swift in Sources */,
 				88731E9721ACEF720003E10C /* JournalDetailViewController.swift in Sources */,
 			);

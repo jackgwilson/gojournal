@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var goToMyJournalBarButton: UIBarButtonItem!
-    @IBOutlet weak var discoverButton: UIBarButtonItem!
+    @IBOutlet weak var getInspirationButton: UIBarButtonItem!
     
     
 
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     @IBAction func goToMyJournalButtonPressed(_ sender: UIBarButtonItem) {
     }
     
-    @IBAction func discoverButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func getInpirationButtonPressed(_ sender: UIBarButtonItem) {
     }
     
     
