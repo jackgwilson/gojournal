@@ -31,7 +31,8 @@ class JournalViewController: UIViewController {
 //        }
         tableView.dataSource = self
         tableView.delegate = self
-        // if entryTitlesArray 
+        // if entryTitlesArray
+        // entryArray = defaultsData.stringArray(forKey: "entryArray") ?? [Entry]()
         entryTitlesArray = defaultsData.stringArray(forKey: "entryTitlesArray") ?? [String]()
         entryLocationsArray = defaultsData.stringArray(forKey: "entryLocationsArray") ?? [String]()
         entriesArray = defaultsData.stringArray(forKey: "entriesArray") ?? [String]()

@@ -23,13 +23,19 @@ class SearchController: UIViewController {
     var currentLocation: CLLocation!
     var searchResults = [JSON]()
     var placesToDiscover: [String] = []
+    var recPlaces = [String]()
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.reloadData()
         //snapToPlace()
+        //fetchVenues()
+        //tableView.reloadData()
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,20 +68,30 @@ class SearchController: UIViewController {
         }
     }
     
-    func fetchVenues() {
-        let url = "https://api.foursquare.com/v2/venues/explore/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&v=20181129&intent=checkin&limit=1&radius=4000&client_id=\(clientID)&client_secret=\(clientSecret)"
+    func fetchVenues(completed: @escaping () -> ()) {
+        print("HELLO")
+        
+        let url = "https://api.foursquare.com/v2/venues/explore/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&limit=20&client_id=HVPMHZXNSJTDJNCYIMA0NEGF554XWPBVKYGATPBMMDFYRUHB&client_secret=XQFRBBGINBRW5M3OV121BRHGHNC21GU3JDWKFAMEABM0JV3P&v=20181129"
         
         Alamofire.request(url).responseJSON { response in
+            print("HELLO2")
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 print("fetchVenues Reponse")
                 print(json)
-                if let closeVenues = json["response"]["groups"]["venue"]["name"][0].string {
-                    print(closeVenues)
-                } else {
-                    print("Could not return close venues.")
+                var items = json["response"]["groups"][0]["items"]
+                for index in 0..<items.count {
+                    let closeVenue = items[index]["venue"]["name"].string
+                    self.recPlaces.append(closeVenue ?? "")
+                
+                    
+                    
                 }
+                //print("HERE AGAIN: \(self.recPlaces)")
+                self.tableView.reloadData()
+
+                
             case .failure(let error):
                 print(error)
             }
@@ -83,6 +99,9 @@ class SearchController: UIViewController {
 //        for venue in placesToDiscover {
 //            venue = JSON(["response"]["venues"][0]["name"].string)
 //        }
+        //print("HERE AGAIN: \(self.recPlaces)")
+        //self.tableView.reloadData()
+        completed()
     }
     
     
@@ -93,12 +112,14 @@ class SearchController: UIViewController {
 
 extension SearchController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        print(recPlaces.count)
+        return recPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = searchResults[(indexPath as NSIndexPath).row]["venue"]["name"].string
+        cell.textLabel?.text = recPlaces[indexPath.row]
+        print("HERE: \(recPlaces[indexPath.row])")
         return cell
     }
     
@@ -136,7 +157,13 @@ extension SearchController: CLLocationManagerDelegate {
         currentLocation = locations.last
         print("CURRENT LOCATION IS \(currentLocation.coordinate.longitude), \(currentLocation.coordinate.latitude)")
         self.snapToPlace()
-        self.fetchVenues()
+        self.fetchVenues() {
+            print("finished")
+            print(self.recPlaces.count)
+            self.tableView.reloadData()
+        }
+        
+        //self.fetchVenues()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
