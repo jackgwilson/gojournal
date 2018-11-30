@@ -65,16 +65,16 @@
                                 <segue destination="S9U-EO-D2L" kind="show" identifier="ShowSearch" id="ckq-va-Jsd"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Go To My Journal" id="DWy-yM-10k">
+                        <barButtonItem key="rightBarButtonItem" title="Go To Journal" id="DWy-yM-10k">
                             <connections>
-                                <action selector="goToMyJournalButtonPressed:" destination="BYZ-38-t0r" id="DBI-eE-USi"/>
+                                <action selector="goToJournalButtonPressed:" destination="BYZ-38-t0r" id="DBI-eE-USi"/>
                                 <segue destination="AEl-wF-Sfv" kind="show" identifier="ShowJournal" id="4sY-ZC-fYn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="getInspirationButton" destination="Hl4-N9-cyl" id="8th-sd-eBn"/>
-                        <outlet property="goToMyJournalBarButton" destination="DWy-yM-10k" id="hSH-9Q-o1C"/>
+                        <outlet property="goToJournalBarButton" destination="DWy-yM-10k" id="hSH-9Q-o1C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -123,13 +123,21 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6er-A7-w1M">
-                                <rect key="frame" x="48" y="734" width="279" height="44"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fz-X1-TdJ">
+                                <rect key="frame" x="16" y="748" width="81" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Return"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="3sa-9l-rod"/>
+                                </connections>
+                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6er-A7-w1M">
+                                <rect key="frame" x="116" y="741" width="259" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" id="cSD-Ew-0w2">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="mX0-Tr-KM0">
-                                            <rect key="frame" x="16" y="7" width="247" height="30"/>
+                                            <rect key="frame" x="16" y="7" width="227" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="A-Z"/>
@@ -148,9 +156,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="xZd-uW-Jgz">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="34h-WY-kc3">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="g6R-iP-jJg">
                             <connections>
-                                <action selector="editBarButtonPressed:" destination="AEl-wF-Sfv" id="7yb-8D-Juc"/>
+                                <action selector="editBarButtonPressed:" destination="AEl-wF-Sfv" id="IDl-Is-gRB"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="GUU-W7-tVT">
@@ -161,7 +169,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addBarButton" destination="GUU-W7-tVT" id="9IY-GE-mDw"/>
-                        <outlet property="editBarButton" destination="34h-WY-kc3" id="qH3-ee-u7J"/>
+                        <outlet property="editBarButton" destination="g6R-iP-jJg" id="dUL-rk-GlV"/>
                         <outlet property="sortSegmentedControl" destination="mX0-Tr-KM0" id="hbf-F3-D2h"/>
                         <outlet property="tableView" destination="YC2-45-4iD" id="Y8o-By-bWl"/>
                     </connections>
@@ -438,5 +446,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="xLp-t2-J2P"/>
         <segue reference="4sY-ZC-fYn"/>
+        <segue reference="3sa-9l-rod"/>
     </inferredMetricsTieBreakers>
 </document>

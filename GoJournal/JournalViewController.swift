@@ -39,7 +39,7 @@ class JournalViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setToolbarHidden(false, animated: false)
+        navigationController?.setToolbarHidden(true, animated: false)
         self.sortSegmentedControl.isHidden = false
 //        spots.loadData {
 //            self.sortBasedOnSegmentPressed()
@@ -89,16 +89,13 @@ class JournalViewController: UIViewController {
     }
     
     
-    
 //    func sortBasedOnSegmentPressed() {
 //        switch sortSegmentedControl.selectedSegmentIndex {
-//        case 0: // Recent
+//        case 0: // A-Z
 //            print("TODO")
-//            // entryTitlesArray.sort(by: {$0.name < $1.name})
+//            entryTitlesArray.sort{ $0 < $1 }
 //        case 1: // Location
-//            entryLocationsArray.sort(by: {$0.name < $1.name})
-//            print("TODO")
-//        case 2:
+//            entryLocationsArray.sort{ $0 < $1 }
 //            print("TODO")
 //        default:
 //            print("***ERROR: This should not have occurred. The segmented control should just have two segments.")
