@@ -24,6 +24,7 @@ class SearchController: UIViewController {
     var searchResults = [JSON]()
     var placesToDiscover: [String] = []
     var recPlaces = [String]()
+    var placeAddresses = [String]()
     
     
 
@@ -44,6 +45,7 @@ class SearchController: UIViewController {
             //self.snapToPlace()
         }
     }
+
     
     func snapToPlace() {
         print(currentLocation)
@@ -71,8 +73,9 @@ class SearchController: UIViewController {
     func fetchVenues(completed: @escaping () -> ()) {
         print("HELLO")
         
-        let url = "https://api.foursquare.com/v2/venues/explore/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&limit=20&client_id=HVPMHZXNSJTDJNCYIMA0NEGF554XWPBVKYGATPBMMDFYRUHB&client_secret=XQFRBBGINBRW5M3OV121BRHGHNC21GU3JDWKFAMEABM0JV3P&v=20181129"
-        
+        let url = "https://api.foursquare.com/v2/venues/explore/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&limit=30&client_id=HVPMHZXNSJTDJNCYIMA0NEGF554XWPBVKYGATPBMMDFYRUHB&client_secret=XQFRBBGINBRW5M3OV121BRHGHNC21GU3JDWKFAMEABM0JV3P&v=20181129"
+        print(currentLocation.coordinate.longitude)
+        print(currentLocation.coordinate.latitude)
         Alamofire.request(url).responseJSON { response in
             print("HELLO2")
             switch response.result {
@@ -84,9 +87,15 @@ class SearchController: UIViewController {
                 for index in 0..<items.count {
                     let closeVenue = items[index]["venue"]["name"].string
                     self.recPlaces.append(closeVenue ?? "")
+                }
                 
-                    
-                    
+                // not pulling category name 
+                
+                for index in 0..<items.count {
+                    let category = items[index]["venue"]["categories"]["name"].string
+                    print(category)
+                    self.placeAddresses.append(category ?? "")
+                    print(self.placeAddresses)
                 }
                 //print("HERE AGAIN: \(self.recPlaces)")
                 self.tableView.reloadData()
@@ -119,6 +128,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = recPlaces[indexPath.row]
+        cell.detailTextLabel?.text = placeAddresses[indexPath.row]
         print("HERE: \(recPlaces[indexPath.row])")
         return cell
     }

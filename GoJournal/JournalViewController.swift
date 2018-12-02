@@ -12,7 +12,6 @@ import AVFoundation
 class JournalViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
     @IBOutlet weak var editBarButton: UIBarButtonItem!
     @IBOutlet weak var addBarButton: UIBarButtonItem!
     
