@@ -50,7 +50,7 @@ class SearchController: UIViewController {
     func snapToPlace() {
         print(currentLocation)
         print(currentLocation.coordinate.longitude)
-        let url = "https://api.foursquare.com/v2/venues/search/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&v=20181129&intent=checkin&limit=1&radius=4000&client_id=\(clientID)&client_secret=\(clientSecret)"
+        let url = "https://api.foursquare.com/v2/venues/search/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&v=20181129&intent=checkin&limit=1&radius=40000&client_id=\(clientID)&client_secret=\(clientSecret)"
         print(url)
         Alamofire.request(url).responseJSON { response in
             switch response.result {
