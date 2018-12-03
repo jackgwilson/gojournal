@@ -24,7 +24,7 @@ class JournalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.sortSegmentedControl.isHidden = false
+        // self.sortSegmentedControl.isHidden = false
 //        for _ in 0..<entriesArray.count {
 //            imageArray.append(UIImage())
 //        }
@@ -40,7 +40,7 @@ class JournalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setToolbarHidden(true, animated: false)
-        self.sortSegmentedControl.isHidden = false
+        // self.sortSegmentedControl.isHidden = false
 //        spots.loadData {
 //            self.sortBasedOnSegmentPressed()
 //            self.tableView.reloadData()
