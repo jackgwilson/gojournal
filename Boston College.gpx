@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx
+xmlns="http://www.topografix.com/GPX/1/1"
+xmlns:gpxx = "http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd
+http://www.garmin.com/xmlschemas/GpxExtensions/v3
+http://www8.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd"
+version="1.1"
+creator="gpx-poi.com">
+   <wpt lat="71.168500" lon="42.335500">
+      <time>2018-12-03T02:38:04Z</time>
+      <name>Boston College</name>
+      <sym>BC</sym>
+      <extensions>
+         <gpxx:WaypointExtension>
+            <gpxx:Address>
+               <gpxx:StreetAddress>140 Commonwealth Avenue</gpxx:StreetAddress>
+               <gpxx:City>Chestnut Hill</gpxx:City>
+               <gpxx:State>MA</gpxx:State>
+               <gpxx:Country>United States</gpxx:Country>
+               <gpxx:PostalCode>02467</gpxx:PostalCode>
+            </gpxx:Address>
+            <gpxx:PhoneNumber Category="Phone">16175524444</gpxx:PhoneNumber>
+            <gpxx:PhoneNumber Category="Phone2">16175524444</gpxx:PhoneNumber>
+            <gpxx:PhoneNumber Category="Fax">16175524444</gpxx:PhoneNumber>
+         </gpxx:WaypointExtension>
+      </extensions>
+   </wpt>
+</gpx>
