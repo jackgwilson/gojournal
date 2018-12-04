@@ -13,7 +13,7 @@ class SearchDetailsViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     var venue: Venue!
-    let regionDistance: CLLocationDistance = 800
+    let regionDistance: CLLocationDistance = 900
 
     override func viewDidLoad() {
         super.viewDidLoad()

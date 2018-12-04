@@ -29,9 +29,9 @@ class JournalDetailViewController: UIViewController, UINavigationControllerDeleg
         self.navigationController!.isToolbarHidden = false
         if let entryTitle = entryTitle {
             titleField.text = entryTitle
-            self.navigationItem.title = "Edit Entry Title"
+            self.navigationItem.title = "Edit Entry"
         } else {
-            self.navigationItem.title = "New Entry Title"
+            self.navigationItem.title = "New Entry"
         }
         if let entryLocation = entryLocation {
             locationField.text = entryLocation
