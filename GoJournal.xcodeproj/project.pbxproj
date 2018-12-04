@@ -17,6 +17,7 @@
 		88562D4421AF8AF900BD0768 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88562D4321AF8AF900BD0768 /* SearchController.swift */; };
 		88562D4621AF8B7200BD0768 /* SearchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88562D4521AF8B7200BD0768 /* SearchDetailsViewController.swift */; };
 		88731E9721ACEF720003E10C /* JournalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88731E9621ACEF720003E10C /* JournalDetailViewController.swift */; };
+		8879652721B5EF2E00E4584F /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879652621B5EF2E00E4584F /* Venue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		88562D4321AF8AF900BD0768 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		88562D4521AF8B7200BD0768 /* SearchDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailsViewController.swift; sourceTree = "<group>"; };
 		88731E9621ACEF720003E10C /* JournalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDetailViewController.swift; sourceTree = "<group>"; };
+		8879652621B5EF2E00E4584F /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		EBDC7C9CE864C04630082D6F /* Pods_GoJournal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoJournal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				8850301C21AB75C1001D8FE6 /* AppDelegate.swift */,
+				8879652621B5EF2E00E4584F /* Venue.swift */,
 				88562D4521AF8B7200BD0768 /* SearchDetailsViewController.swift */,
 				88562D4321AF8AF900BD0768 /* SearchController.swift */,
 				88731E9621ACEF720003E10C /* JournalDetailViewController.swift */,
@@ -308,6 +311,7 @@
 				8850301F21AB75C1001D8FE6 /* ViewController.swift in Sources */,
 				88562D4421AF8AF900BD0768 /* SearchController.swift in Sources */,
 				8850302F21ABA0C6001D8FE6 /* JournalViewController.swift in Sources */,
+				8879652721B5EF2E00E4584F /* Venue.swift in Sources */,
 				88562D4621AF8B7200BD0768 /* SearchDetailsViewController.swift in Sources */,
 				8850301D21AB75C1001D8FE6 /* AppDelegate.swift in Sources */,
 				88731E9721ACEF720003E10C /* JournalDetailViewController.swift in Sources */,

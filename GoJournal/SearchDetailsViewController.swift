@@ -7,14 +7,25 @@
 //
 
 import UIKit
+import MapKit
 
 class SearchDetailsViewController: UIViewController {
+    
+    @IBOutlet var mapView: MKMapView!
+    var venue: Venue!
+    let regionDistance: CLLocationDistance = 800
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let region = MKCoordinateRegion(center: venue.coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+        mapView.setRegion(region, animated: true)
+        updateMap()
     }
     
-
+    func updateMap() {
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(venue)
+        mapView.setCenter(venue.coordinate, animated: true)
+    }
+    
 }

@@ -23,8 +23,8 @@ class SearchController: UIViewController {
     var currentLocation: CLLocation!
     var searchResults = [JSON]()
     var placesToDiscover: [String] = []
-    var recPlaces = [String]()
-    var placeAddresses = [String]()
+    var recPlaces = [Venue]()
+    var placeDetails = [String]()
     
     
 
@@ -73,7 +73,8 @@ class SearchController: UIViewController {
     func fetchVenues(completed: @escaping () -> ()) {
         print("HELLO")
         
-        let url = "https://api.foursquare.com/v2/venues/explore/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&limit=30&client_id=HVPMHZXNSJTDJNCYIMA0NEGF554XWPBVKYGATPBMMDFYRUHB&client_secret=XQFRBBGINBRW5M3OV121BRHGHNC21GU3JDWKFAMEABM0JV3P&v=20181129"
+        let url = "https://api.foursquare.com/v2/venues/explore/?ll=\(currentLocation.coordinate.latitude),\(currentLocation.coordinate.longitude)&limit=30&client_id=HVPMHZXNSJTDJNCYIMA0NEGF554XWPBVKYGATPBMMDFYRUHB&client_secret=XQFRBBGINBRW5M3OV121BRHGHNC21GU3JDWKFAMEABM0JV3P&v=20181203"
+        print(url)
         print(currentLocation.coordinate.longitude)
         print(currentLocation.coordinate.latitude)
         Alamofire.request(url).responseJSON { response in
@@ -85,17 +86,23 @@ class SearchController: UIViewController {
                 print(json)
                 var items = json["response"]["groups"][0]["items"]
                 for index in 0..<items.count {
-                    let closeVenue = items[index]["venue"]["name"].string
-                    self.recPlaces.append(closeVenue ?? "")
+                    
+                    let venue = items[index]["venue"]
+                    let name = venue["name"].stringValue
+                    let location = venue["location"]
+                    let latitude = location["lat"].doubleValue
+                    let longitude = location["lng"].doubleValue
+                    let venueObject = Venue(venue: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                    self.recPlaces.append(venueObject)
                 }
                 
                 // not pulling category name 
                 
                 for index in 0..<items.count {
-                    let category = items[index]["venue"]["categories"]["name"].string
-                    print(category)
-                    self.placeAddresses.append(category ?? "")
-                    print(self.placeAddresses)
+                    let detail = items[index]["venue"]["categories"]["name"].string
+                    print(detail)
+                    self.placeDetails.append(detail ?? "")
+                    print(self.placeDetails)
                 }
                 //print("HERE AGAIN: \(self.recPlaces)")
                 self.tableView.reloadData()
@@ -114,7 +121,13 @@ class SearchController: UIViewController {
     }
     
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMap" {
+            let destination = segue.destination as! SearchDetailsViewController
+            let selectedIndex = tableView.indexPathForSelectedRow!.row
+            destination.venue = recPlaces[selectedIndex]
+        }
+    }
     
 
 }
@@ -127,8 +140,8 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = recPlaces[indexPath.row]
-        cell.detailTextLabel?.text = placeAddresses[indexPath.row]
+        cell.textLabel?.text = recPlaces[indexPath.row].venueName
+        cell.detailTextLabel?.text = placeDetails[indexPath.row]
         print("HERE: \(recPlaces[indexPath.row])")
         return cell
     }

@@ -63,6 +63,12 @@ class JournalViewController: UIViewController {
         }
     }
     
+    func saveDefaultsData() {
+        defaultsData.set(entryTitlesArray, forKey: "entryTitlesArray")
+        defaultsData.set(entryLocationsArray, forKey: "entryLocationsArray")
+        defaultsData.set(entriesArray, forKey: "entriesArray")
+    }
+    
     @IBAction func unwindFromDetailViewController(segue: UIStoryboardSegue) {
         let sourceViewController = segue.source as! JournalDetailViewController
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -82,11 +88,7 @@ class JournalViewController: UIViewController {
         saveDefaultsData()
     }
     
-    func saveDefaultsData() {
-        defaultsData.set(entryTitlesArray, forKey: "entryTitlesArray")
-        defaultsData.set(entryLocationsArray, forKey: "entryLocationsArray")
-        defaultsData.set(entriesArray, forKey: "entriesArray")
-    }
+
     
     
 //    func sortBasedOnSegmentPressed() {

@@ -8,7 +8,7 @@ http://www.garmin.com/xmlschemas/GpxExtensions/v3
 http://www8.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd"
 version="1.1"
 creator="gpx-poi.com">
-   <wpt lat="71.168500" lon="42.335500">
+   <wpt lat="42.335500" lon="-71.168500">
       <time>2018-12-03T02:38:04Z</time>
       <name>Boston College</name>
       <sym>BC</sym>

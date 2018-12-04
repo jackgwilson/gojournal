@@ -64,7 +64,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "../Boston Common.gpx"
+         identifier = "../Boston College.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
