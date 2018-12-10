@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var goToJournalBarButton: UIBarButtonItem!
     @IBOutlet weak var getInspirationButton: UIBarButtonItem!
     
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
